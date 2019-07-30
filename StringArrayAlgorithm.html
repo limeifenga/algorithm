@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /**字符串旋转*/
+    /*
+     1、字符串翻转
+    **/
+    const strReverse = (str) => {
+        return str.split("").reverse().join('');
+    };
+    console.log(strReverse("helloWorld")); // dlroWolleh
+    /*
+     2.单词翻转
+    * */
+    const wordReverse = (str) => {
+        return str.split(" ").reverse().join('');
+    };
+    console.log(wordReverse("hello World and you")); // you and World hello
+    /*
+     3.把字符串前面的n个字符移动到字符串的尾部，如把字符串“abcdef”前面的2个字符'a'和'b'移动到字符串的尾部，使得原字符串变成字符串“cdefab”。
+    * */
+    const strMove = (str,n) => {
+        return  str.substring(n,str.length) + str.substring(0,n);
+    };
+    console.log(strMove("abcdef",2)) //cdefab
+    /*
+     在原字符串中把字符串尾部的m个字符移动到字符串的头部， 例如，原字符串为”Ilovebaofeng”，m=7，输出结果为：”baofengIlove”。
+     * */
+    const strMoveR = (str,m) => {
+        return strMove(str,str.length - m)
+    };
+    console.log(strMoveR("Ilovebaofeng",7)) //baofengIlove
+    /*
+     4.链表翻转；给出一个链表和一个数k，比如，链表为1→2→3→4→5→6，k=2，则翻转后2→1→6→5→4→3，若k=3，翻转后3→2→1→6→5→4，若k=4，翻转后4→3→2→1→6→5
+    * */
+    const chainFlip = (chain,m) => {
+        let index;
+        chain = chain.split("").reverse();
+        chain = chain.map((n)=>{
+            return parseInt(n);
+        });
+        for(let i = 0;i < chain.length; i++) {
+            if(chain[i] === m){
+                index = i;
+                break;
+            }
+        };
+        if(index){
+            chain = chain.slice(index,chain.length).join('') + chain.slice(0,index).join('');
+        }else {chain = chain.join('')}
+        return chain
+    };
+    console.log(chainFlip("123456",2)) //216543
+    /*
+       单词翻转。输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变，句子中单词以空格符隔开。为简单起见，标点符号和普通字母一样处理。例如，输入“I am a student.”，则输出“student. a am I”。
+    * */
+    const wordReverses = (word) => {
+        return word.split(" ").reverse().join(" ")
+    };
+    console.log(wordReverses("I am a student."))//student. a am I
+    /**字符串包含*/
+    /*
+    1、给定两个分别由字母组成的字符串A和字符串B，字符串B的长度比字符串A短。请问，如何最快地判断字符串B中所有字母是否都在字符串A里？
+    * */
+    const about = (a,b) => {
+        let state = true;
+
+        // 方法一：indexOf()
+        for(let i  in  b){
+            if(a.indexOf(b[i]) < 0){
+                state =  false;
+                break
+            }
+        };
+
+        // 方法二： new Set()  has
+        // a = new Set(a.split(''));
+        // for(let i  in  b){
+        //     if(!a.has(b[i])){
+        //         state =  false;
+        //         break
+        //     }
+        // };
+        return state;
+    };
+    console.log(about('ABCD','BAD'))
+    /*
+       打乱数组元素
+    */
+    const prevStr = (array) =>{
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i +1))
+            var temp = array[i]; // 当前i对应值 存储
+            array[i] = array[j]; // 当前i的值   设置为 随机下标的值
+            array[j] = temp;     // 再把随机下标的值   设置为存储的值
+        }
+        return array;
+    };
+    console.log(prevStr(['a','b','c','d']))
+</script>
+</html>
